@@ -19,9 +19,24 @@
 
 /* {============================= Element Selectors =============================} */
 /* <------ Header Styles: ------> */
+header {
+  font-size: 20px;
+}
 
 /* <------ Main Styles: ------> */
+main {
+  margin-top: 10%;
+}
+
 
 /* {============================= Class Selectors =============================} */
+.card-body {
+  margin: 5% 0;
+}
 
 /* {============================= ID Selectors =============================} */
+#submitInitialBtn {
+  /* move the submit button a little bit upper */
+  position: relative;
+  bottom: 5px;
+}

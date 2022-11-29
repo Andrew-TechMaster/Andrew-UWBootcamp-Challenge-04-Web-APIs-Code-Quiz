@@ -19,26 +19,90 @@
 <body>
     <!-- {============================= Header =============================} -->
     <header>
-        <h1>This is the header</h1>
+        <nav class="navbar bg-primary">
+            <button class="btn btn-lg btn-info" type="button" id="viewBtn">View High Score</button>
+            <span class="navbar-text text-light">
+                Time
+            </span>
+        </nav>
     </header>
 
     <!-- {============================= Main =============================} -->
     <main class="container">
         <!------ Menu / Launch Challenge  ------>
         <section id="menuSection">
-            temp
+            <div class="card">
+                <h1 class="card-header">Coding Quiz Challenge</h1>
+                <div class="card-body">
+                    <h4 class="card-title">Let's test your knowledge on JavaScript fundamentals! Try to answer the
+                        followding code-related questions within the time limit.</h4>
+                    <p class="card-text">Press the start button to begin the quiz. Keep in mind that incorrect answers
+                        will penalize your time by ten seconds!</p>
+                    <p><a href="#" class="btn btn-primary btn-lg" id="startBtn">Start</a></h3>
+                </div>
+            </div>
         </section>
+
         <!------ Code Quiz / Game Start ------>
         <section id="quizSection">
-            temp
+            <div class="card">
+                <h2 class="card-header" id="questionTitle">
+                    Question Placeholder?
+                </h2>
+                <div class="card-body">
+                    <p> <button type="button" class="btn btn-primary btn-lg" id="optionA">A</button></p>
+                    <p> <button type="button" class="btn btn-primary btn-lg" id="optionB">B</button></p>
+                    <p> <button type="button" class="btn btn-primary btn-lg" id="optionC">C</button></p>
+                    <p> <button type="button" class="btn btn-primary btn-lg" id="optionD">D</button></p>
+                </div>
+                <div class="card-footer" id="checkMessage">
+                    right / wrong
+                </div>
         </section>
+
         <!------ Evaluate / Settle  ------>
         <section id="settleSection">
-            temp
-        </section id="viewScoreSection">
+            <div class="card">
+                <h2 class="card-header" id="questionTitle">
+                    All Done!
+                </h2>
+                <div class="card-body">
+                    <h3 class="card-title" id="displayScore"></h3>
+                    <form class="form" id="initialInput">
+                        <div class="form-group row">
+                            <label for="inputName" class="col-form-label">Enter Initials:</label>
+                            <div class="col-6">
+                                <input type="text" class="form-control" id="inputName" placeholder="JS for John Smith">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitInitialBtn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <!------ View High Score / Rank  ------>
-        <section>
-            temp
+        <section id="viewScoreSection">
+            <table class="table table-striped" id="scoreTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Initial</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td id="resName">AC</td>
+                        <td id="resScore">100</td>
+                    </tr>
+                    <tr>
+                        <td id="resName">JS</td>
+                        <td id="resScore">50</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary btn-lg" id="goBackBtn">Go Back</button>
+            <button type="submit" class="btn btn-primary  btn-lg" id="clearBtn">Clear</button>
         </section>
 
     </main>
