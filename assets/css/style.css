@@ -55,3 +55,23 @@ form {
 #displayScore {
   margin-bottom: 5%;
 }
+
+#questionTitle::before {
+  content: "Q: ";
+}
+
+#optionA::before {
+  content: "1.  ";
+}
+
+#optionB::before {
+  content: "2.  ";
+}
+
+#optionC::before {
+  content: "3.  ";
+}
+
+#optionD::before {
+  content: "4.  ";
+}
