@@ -45,6 +45,16 @@ form {
   display: block;
 }
 
+.answerCorrect {
+  background-color: lightgreen;
+  color: white;
+}
+
+.answerWrong {
+  background-color: #FA2A55;
+  color: white;
+}
+
 /* {============================= ID Selectors =============================} */
 #submitInitialBtn {
   /* move the submit button a little bit upper */
@@ -56,7 +66,7 @@ form {
   margin-bottom: 5%;
 }
 
-#questionTitle::before {
+#quizSection #questionTitle::before {
   content: "Q: ";
 }
 

@@ -15,6 +15,7 @@ var submitInitialBtnEl = document.querySelector("#submitInitialBtn");
 var goBackBtnEl = document.querySelector("#goBackBtn");
 var clearBtnEl = document.querySelector("#clearBtn");
 /* <------ Other / TextAreaEl ------> */
+var navBarDefaultTextEL = document.querySelector("#navBarDefaultText");
 var timerEl = document.querySelector("#timer");
 var questionTitleEl = document.querySelector("#questionTitle");
 var checkMessageEl = document.querySelector("#checkMessage");
@@ -31,15 +32,22 @@ var resultArray = [];
 /* {============================= Functions (callback) =============================} */
 /* <------ Count Down / Timer ------> */
 function countDown() {
+    navBarDefaultTextEL.classList.add("hidden");
+    timerEl.className = "visible";
+
     var timeInterval = setInterval(function () {
         timeLeft--;
-        timerEl.textContent = `: ${timeLeft} sec`;
+        timerEl.textContent = `Time: ${timeLeft} sec`;
 
+        // if (time == 0 sec) => stops execution of action at set interval
+        // if (time !=== 0 sec && finish all questions) => stops execution of action at set interval
         if (timeLeft === 0) {
-            // Stops execution of action at set interval
             clearInterval(timeInterval);
-            timerEl.textContent = "is up";
+            timerEl.textContent = "Time is up!";
             endGame();
+        } else if ((timeLeft !== 0) && (questionIndex >= lengthOfQuestions)) {
+            clearInterval(timeInterval);
+            timerEl.textContent = "Complete all questions!";
         }
     }, 1000)
 }
@@ -56,8 +64,32 @@ function getQuestion() {
         optionCEl.textContent = setOfQuestions[questionIndex].choices[2];
         optionDEl.textContent = setOfQuestions[questionIndex].choices[3];
     } else {
-        endGame();
+        setTimeout(endGame, 1000);
     }
+}
+
+/* <------ Check Answer / Calculate Result ------> */
+function checkAnswer(finalChoice) {
+    if (finalChoice === questionCollection[questionIndex].answer) {
+        totalScore += 5;
+        checkMessageEl.textContent = "Congragulations! You are right!";
+        checkMessageEl.classList.add("answerCorrect");
+        setTimeout(() => {
+            checkMessageEl.textContent = "";
+            checkMessageEl.classList.remove("answerCorrect");
+        }, 2000);
+    } else {
+        totalScore -= 2;
+        timeLeft -= 10;
+        checkMessageEl.textContent = ":( Wrong~~";
+        checkMessageEl.classList.add("answerWrong");
+        setTimeout(() => {
+            checkMessageEl.textContent = ""
+            checkMessageEl.classList.remove("answerWrong");
+        }, 2000);
+    }
+
+    questionIndex++;
 }
 
 /* <------ End Game / Game Over ------> */
@@ -68,7 +100,21 @@ function endGame() {
     displayScoreEl.textContent = `Your Final Score is ${totalScore}`
 }
 /* {============================= Add Event Listener  =============================} */
-// btn.addEventListener("click", callback)
+startBtnEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    countDown();
+    getQuestion();
+});
+
+quizSectionEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    var target = evt.target;
+    if (target.matches(".btn")) {
+        var item = target.textContent;
+        checkAnswer(item);
+        getQuestion();
+    }
+})
 
 /* {============================= Temp For Testing / Notes  =============================} */
 // startGame() => call countDown(), call getQuestion() 
@@ -85,9 +131,3 @@ function endGame() {
 console.log(setOfQuestions);
 console.log(`#Question: ${lengthOfQuestions} & Total Time: ${timeLeft} `);
 console.log(setOfQuestions[questionIndex].choices[3])
-
-startBtnEl.addEventListener("click", function (evt) {
-    evt.preventDefault();
-    // countDown();
-    getQuestion();
-});
