@@ -1,8 +1,24 @@
 /* {============================= DOM / Element / Variable Declaration  =============================} */
 /* <------ SectionEl ------> */
-
+var menuEl = document.querySelector("#menuSection");
+var quizEl = document.querySelector("#quizSection");
+var settleEl = document.querySelector("#settleSection");
+var viewhighScoreEl = document.querySelector("#viewScoreSection");
 /* <------ ButtonEl ------> */
-
+var viewBtnEl = document.querySelector("#viewBtn");
+var startBtnEl = document.querySelector("#startBtn");
+var optionAEl = document.querySelector("#optionA");
+var optionBEl = document.querySelector("#optionB");
+var optionCEl = document.querySelector("#optionC");
+var optionDEl = document.querySelector("#optionD");
+var submitInitialBtnEl = document.querySelector("#submitInitialBtn");
+var goBackBtnEl = document.querySelector("#goBackBtn");
+var clearBtnEl = document.querySelector("#clearBtn");
+/* <------ Other / TextAreaEl ------> */
+var questionTitleEl = document.querySelector("#questionTitle");
+var checkMessageEl = document.querySelector("#checkMessage");
+var displayScoreEl = document.querySelector("#displayScore");
+var inputNameEl = document.querySelector("#inputName");
 /* <------ Variables ------> */
 var setOfQuestions = questionCollection;
 var lengthOfQuestions = setOfQuestions.length;
@@ -12,6 +28,12 @@ var questionIndex = 0;
 var resultArray = [];
 
 /* {============================= Functions (callback) =============================} */
+
+
+/* {============================= Add Event Listener  =============================} */
+// btn.addEventListener("click", callback)
+
+/* {============================= Temp For Testing / Notes  =============================} */
 // startGame() => call countDown(), call getQuestion() 
 // countDown() => return void
 // getQuestion() => return void
@@ -23,10 +45,5 @@ var resultArray = [];
 // showScore() => return void, show the viewScoreSection
 // toHomepage() => back to the home page
 // clearAll() => clear local storage
-
-/* {============================= Add Event Listener  =============================} */
-// btn.addEventListener("click", callback)
-
-/* {============================= Temp For Testing / Notes  =============================} */
 console.log(setOfQuestions);
 console.log(`#Question: ${lengthOfQuestions} & Total Time: ${timeLeft} `);

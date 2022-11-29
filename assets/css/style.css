@@ -28,10 +28,21 @@ main {
   margin-top: 10%;
 }
 
+form {
+  margin-left: 2%;
+}
 
 /* {============================= Class Selectors =============================} */
 .card-body {
   margin: 5% 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 
 /* {============================= ID Selectors =============================} */
@@ -39,4 +50,8 @@ main {
   /* move the submit button a little bit upper */
   position: relative;
   bottom: 5px;
+}
+
+#displayScore {
+  margin-bottom: 5%;
 }
