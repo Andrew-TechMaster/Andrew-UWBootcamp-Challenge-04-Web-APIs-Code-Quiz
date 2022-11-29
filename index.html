@@ -22,7 +22,7 @@
         <nav class="navbar bg-primary">
             <button class="btn btn-lg btn-info" type="button" id="viewBtn">View High Score</button>
             <span class="navbar-text text-light">
-                Time
+                Time <span id="timer"></span>
             </span>
         </nav>
     </header>
@@ -44,7 +44,7 @@
         </section>
 
         <!------ Code Quiz / Game Start ------>
-        <section id="quizSection">
+        <section class="hidden" id="quizSection">
             <div class="card">
                 <h2 class="card-header" id="questionTitle">
                     Question Placeholder?
@@ -61,7 +61,7 @@
         </section>
 
         <!------ Evaluate / Settle  ------>
-        <section id="settleSection">
+        <section class="hidden" id="settleSection">
             <div class="card">
                 <h2 class="card-header" id="questionTitle">
                     All Done!
@@ -82,7 +82,7 @@
         </section>
 
         <!------ View High Score / Rank  ------>
-        <section id="viewScoreSection">
+        <section class="hidden" id="viewScoreSection">
             <table class="table table-striped" id="scoreTable">
                 <thead>
                     <tr>

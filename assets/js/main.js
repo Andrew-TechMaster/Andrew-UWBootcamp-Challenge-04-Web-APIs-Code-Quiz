@@ -15,6 +15,7 @@ var submitInitialBtnEl = document.querySelector("#submitInitialBtn");
 var goBackBtnEl = document.querySelector("#goBackBtn");
 var clearBtnEl = document.querySelector("#clearBtn");
 /* <------ Other / TextAreaEl ------> */
+var timerEl = document.querySelector("#timer");
 var questionTitleEl = document.querySelector("#questionTitle");
 var checkMessageEl = document.querySelector("#checkMessage");
 var displayScoreEl = document.querySelector("#displayScore");
@@ -28,7 +29,19 @@ var questionIndex = 0;
 var resultArray = [];
 
 /* {============================= Functions (callback) =============================} */
+/* <------ Count Down / Timer ------> */
+function countDown() {
+    var timeInterval = setInterval(function () {
+        timeLeft--;
+        timerEl.textContent = `: ${timeLeft} sec`;
 
+        if (timeLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timeInterval);
+            timerEl.textContent = "is up";
+        }
+    }, 1000)
+}
 
 /* {============================= Add Event Listener  =============================} */
 // btn.addEventListener("click", callback)
@@ -47,3 +60,8 @@ var resultArray = [];
 // clearAll() => clear local storage
 console.log(setOfQuestions);
 console.log(`#Question: ${lengthOfQuestions} & Total Time: ${timeLeft} `);
+
+startBtnEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    countDown();
+});
