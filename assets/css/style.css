@@ -18,6 +18,12 @@
 }
 
 /* {============================= Element Selectors =============================} */
+body {
+  background-image: url("../images/bg.jpg");
+  background-size: cover;
+  background-position: 0 305px;
+}
+
 /* <------ Header Styles: ------> */
 header {
   font-size: 20px;
@@ -47,12 +53,12 @@ form {
 
 .answerCorrect {
   background-color: lightgreen;
-  color: white;
+  color: grey;
 }
 
 .answerWrong {
   background-color: #FA2A55;
-  color: white;
+  color: black;
 }
 
 /* {============================= ID Selectors =============================} */

@@ -28,6 +28,8 @@ var timeLeft = lengthOfQuestions * 10;
 var totalScore = 0;
 var questionIndex = 0;
 var resultArray = [];
+let wrongPenalty = 2;
+let correctBonus = 10;
 
 /* {============================= Functions (callback) =============================} */
 /* <------ Count Down / Timer ------> */
@@ -40,8 +42,6 @@ function countDown() {
         timeLeft--;
         timerEl.textContent = `Time: ${timeLeft} sec`;
 
-        // if (time == 0 sec) => stops execution of action at set interval
-        // if (time !=== 0 sec && finish all questions) => stops execution of action at set interval
         if (timeLeft <= 0) {
             clearInterval(timeInterval);
             timerEl.textContent = "Time is up!";
@@ -65,29 +65,29 @@ function getQuestion() {
         optionCEl.textContent = setOfQuestions[questionIndex].choices[2];
         optionDEl.textContent = setOfQuestions[questionIndex].choices[3];
     } else {
-        setTimeout(endGame, 1000);
+        setTimeout(endGame, 1500);
     }
 }
 
 /* <------ Check Answer / Calculate Result ------> */
 function checkAnswer(finalChoice) {
     if (finalChoice === questionCollection[questionIndex].answer) {
-        totalScore += 5;
-        checkMessageEl.textContent = "Congragulations! You are right!";
+        totalScore += correctBonus;
+        checkMessageEl.textContent = `🎉 You are right! +${correctBonus} points 🎉`;
         checkMessageEl.classList.add("answerCorrect");
         setTimeout(() => {
             checkMessageEl.textContent = "";
             checkMessageEl.classList.remove("answerCorrect");
-        }, 2000);
+        }, 1500);
     } else {
-        totalScore -= 2;
+        totalScore -= wrongPenalty;
         timeLeft -= 10;
-        checkMessageEl.textContent = ":( Wrong~~";
+        checkMessageEl.textContent = `🙅 Incorrect, -${wrongPenalty} points & total time -10 sec 🙅`;
         checkMessageEl.classList.add("answerWrong");
         setTimeout(() => {
             checkMessageEl.textContent = ""
             checkMessageEl.classList.remove("answerWrong");
-        }, 2000);
+        }, 1500);
     }
 
     questionIndex++;
@@ -112,9 +112,6 @@ function setScore() {
     resultArray.push(userNameScore);
     var userNameScore_Serialization = JSON.stringify(resultArray);
     localStorage.setItem("userNameScore", userNameScore_Serialization);
-
-    // var userNameScore_Serialization = JSON.stringify(userNameScore);
-    // localStorage.setItem("userNameScore", userNameScore_Serialization);
 }
 
 /* <------ Get Score / Return Array Obj ------> */
@@ -124,16 +121,6 @@ function getScore() {
     var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
 
     return savedUserNameScore_Deserialize;
-
-    // var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
-    // var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
-
-    // if (savedUserNameScore_Deserialize != null) {
-    //     resultArray.push(savedUserNameScore_Deserialize);
-    // }
-
-    // console.log(resultArray);
-    // return resultArray;
 }
 
 /* <------ Print Score ------> */
@@ -258,6 +245,9 @@ clearBtnEl.addEventListener("click", function (evt) {
 })
 
 init();
+
+
+
 /* {============================= Temp For Testing / Notes  =============================} */
 // startGame() => call countDown(), call getQuestion() 
 // countDown() => return void
@@ -270,6 +260,6 @@ init();
 // showScore() => return void, show the viewScoreSection
 // toHomepage() => back to the home page
 // clearAll() => clear local storage
-console.log(setOfQuestions);
-console.log(`#Question: ${lengthOfQuestions} & Total Time: ${timeLeft} `);
-console.log(setOfQuestions[questionIndex].choices[3])
+// console.log(setOfQuestions);
+// console.log(`#Question: ${lengthOfQuestions} & Total Time: ${timeLeft} `);
+// console.log(setOfQuestions[questionIndex].choices[3])
