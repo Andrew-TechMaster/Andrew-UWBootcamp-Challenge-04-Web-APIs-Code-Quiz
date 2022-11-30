@@ -80,21 +80,41 @@ form {
 }
 
 #quizSection #questionTitle::before {
-  content: "Q: ";
+  /* content: "Q: "; */
+  content: url("../images/Q_apple.png");
+  position: relative;
+  top: 8px;
+  right: 8px;
 }
 
 #optionA::before {
-  content: "1.  ";
+  /* content: "1.  "; */
+  content: url("../images/A.png");
+  position: relative;
+  top: 7px;
+  right: 10px;
 }
 
 #optionB::before {
-  content: "2.  ";
+  /* content: "2.  "; */
+  content: url("../images/b.png");
+  position: relative;
+  top: 7px;
+  right: 10px;
 }
 
 #optionC::before {
-  content: "3.  ";
+  /* content: "3.  "; */
+  content: url("../images/C.png");
+  position: relative;
+  top: 7px;
+  right: 10px;
 }
 
 #optionD::before {
-  content: "4.  ";
+  /* content: "4.  "; */
+  content: url("../images/D.png");
+  position: relative;
+  top: 7px;
+  right: 10px;
 }
