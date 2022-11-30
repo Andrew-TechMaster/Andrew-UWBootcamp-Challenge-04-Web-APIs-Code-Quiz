@@ -116,7 +116,6 @@ function setScore() {
 
 /* <------ Get Score / Return Array Obj ------> */
 function getScore() {
-
     var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
     var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
 
@@ -178,6 +177,8 @@ function viewScore() {
     menuSectionEl.className = "hidden";
     quizSectionEl.className = "hidden";
     viewhighScoreSectionEl.className = "visible";
+
+    inputNameEl.value = "";
 }
 
 /* <------ Back To Home Page ------> */
@@ -194,7 +195,7 @@ function toHomepage() {
 /* <------ Clear up local storage ------> */
 function clearAll() {
     localStorage.clear();
-    userArray = [];
+    resultArray = [];
 }
 
 /* <------ init  ------> */
@@ -208,6 +209,7 @@ function init() {
 }
 
 /* {============================= Add Event Listener  =============================} */
+/* <------ View High Score Button ------> */
 viewBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     var data = getScore();
@@ -215,6 +217,7 @@ viewBtnEl.addEventListener("click", function (evt) {
     viewScore();
 })
 
+/* <------ Start Button ------> */
 startBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     totalScore = 0;
@@ -225,6 +228,7 @@ startBtnEl.addEventListener("click", function (evt) {
     getQuestion();
 });
 
+/* <------ Quiz Section: Options Button ------> */
 quizSectionEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     var target = evt.target;
@@ -235,6 +239,7 @@ quizSectionEl.addEventListener("click", function (evt) {
     }
 })
 
+/* <------ Submit Initial Button ------> */
 submitInitialBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     setScore();
@@ -243,14 +248,17 @@ submitInitialBtnEl.addEventListener("click", function (evt) {
     viewScore();
 })
 
+/* <------ Go Back Button ------> */
 goBackBtnEl.addEventListener("click", toHomepage)
 
+/* <------ Clear Button ------> */
 clearBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     clearAll();
     printScore();
 })
 
+/* <------ Delete Button In View Score Table ------> */
 viewhighScoreSectionEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     var element = evt.target;
@@ -267,6 +275,7 @@ viewhighScoreSectionEl.addEventListener("click", function (evt) {
     }
 })
 
+/* <------ Inint function ------> */
 init();
 
 
