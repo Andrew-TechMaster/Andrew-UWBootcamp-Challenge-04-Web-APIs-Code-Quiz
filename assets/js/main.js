@@ -42,7 +42,7 @@ function countDown() {
 
         // if (time == 0 sec) => stops execution of action at set interval
         // if (time !=== 0 sec && finish all questions) => stops execution of action at set interval
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
             clearInterval(timeInterval);
             timerEl.textContent = "Time is up!";
             endGame();
@@ -141,10 +141,28 @@ function printScore(printedData) {
     var tbBody = document.querySelector("#tableBody");
     tbBody.innerHTML = "";
 
-    for (let i = 0; i < printedData.length; i++) {
+    if (printedData !== null) {
+        for (let i = 0; i < printedData.length; i++) {
+            var newRow = document.createElement("tr");
+            var userName = printedData[i].userName;
+            var userScore = printedData[i].userScore;
+
+            var newCol01 = document.createElement("td");
+            var col01Content = document.createTextNode(userName);
+            newCol01.appendChild(col01Content)
+            newRow.appendChild(newCol01);
+
+            var newCol02 = document.createElement("td");
+            var col02Content = document.createTextNode(userScore);
+            newCol02.appendChild(col02Content)
+            newRow.appendChild(newCol02)
+
+            tbBody.appendChild(newRow);
+        }
+    } else {
         var newRow = document.createElement("tr");
-        var userName = printedData[i].userName;
-        var userScore = printedData[i].userScore;
+        var userName = "JS (Example User)";
+        var userScore = "10 (Example Score)"
 
         var newCol01 = document.createElement("td");
         var col01Content = document.createTextNode(userName);
@@ -179,6 +197,12 @@ function toHomepage() {
     timerEl.classList.replace("visible", "hidden");
 }
 
+/* <------ Clear up local storage ------> */
+function clearAll() {
+    localStorage.clear();
+    userArray = [];
+}
+
 /* <------ init  ------> */
 // prevent reolading then clear up all loacalstorage
 // since I initialize an empty resultArray at first 
@@ -190,7 +214,8 @@ function init() {
 }
 
 /* {============================= Add Event Listener  =============================} */
-viewBtnEl.addEventListener("click", function () {
+viewBtnEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
     var data = getScore();
     printScore(data);
     viewScore();
@@ -225,6 +250,12 @@ submitInitialBtnEl.addEventListener("click", function (evt) {
 })
 
 goBackBtnEl.addEventListener("click", toHomepage)
+
+clearBtnEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    clearAll();
+    printScore();
+})
 
 init();
 /* {============================= Temp For Testing / Notes  =============================} */
