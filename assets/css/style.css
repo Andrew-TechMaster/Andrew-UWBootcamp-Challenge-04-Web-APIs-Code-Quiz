@@ -97,7 +97,7 @@ form {
 
 #optionB::before {
   /* content: "2.  "; */
-  content: url("../images/b.png");
+  content: url("../images/B.png");
   position: relative;
   top: 7px;
   right: 10px;
