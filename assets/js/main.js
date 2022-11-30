@@ -178,6 +178,9 @@ function viewScore() {
     quizSectionEl.className = "hidden";
     viewhighScoreSectionEl.className = "visible";
 
+    navBarDefaultTextEL.classList.replace("visible", "hidden");
+    timerEl.classList.replace("visible", "hidden");
+
     inputNameEl.value = "";
 }
 

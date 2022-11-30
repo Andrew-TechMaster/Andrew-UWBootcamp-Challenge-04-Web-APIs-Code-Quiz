@@ -7,7 +7,7 @@
 >
 > * Local Storage to store the data
 
-> **Note**: There is another js file called "questionCollectionObj.js", you can place your own questions set here. Remeber the to follow the format.
+> **Note**: There is another js file called "questionCollectionObj.js", you can place your own questions set here. Remeber follow the format.
 >
 
 
@@ -24,11 +24,11 @@ https://andrew-techmaster.github.io/Andrew-UWBootcamp-Challenge-04-Web-APIs-Code
 |:--:| 
 | *Click start to begin the quiz* |
 
-|![screentshot02](./assets/images/sc01.png)|
+|![screentshot02](./assets/images/sc02.png)|
 |:--:| 
 | *Demo for one of the question* |
 
-|![screentshot02](./assets/images/sc01.png)|
+|![screentshot02](./assets/images/sc03.png)|
 |:--:| 
 | *Click "View High Score" button to diplay the rusult* |
 
