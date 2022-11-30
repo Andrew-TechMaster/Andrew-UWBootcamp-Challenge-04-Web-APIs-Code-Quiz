@@ -99,6 +99,64 @@ function endGame() {
 
     displayScoreEl.textContent = `Your Final Score is ${totalScore}`
 }
+
+
+/* <------ Set Score / Convert obj to JSON and then save it on local storage ------> */
+function setScore() {
+    var userNameScore = {
+        userName: inputNameEl.value,
+        userScore: totalScore,
+    };
+
+    var userNameScore_Serialization = JSON.stringify(userNameScore);
+    localStorage.setItem("userNameScore", userNameScore_Serialization);
+}
+
+/* <------ Get Score / Return Array Obj ------> */
+function getScore() {
+    var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
+    var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
+
+    if (savedUserNameScore_Deserialize != null) {
+        resultArray.push(savedUserNameScore_Deserialize);
+    }
+
+    console.log(resultArray);
+    return resultArray;
+}
+
+/* <------ Print Score ------> */
+function printScore(printedData) {
+    var tbBody = document.querySelector("#tableBody");
+    tbBody.innerHTML = "";
+
+    for (let i = 0; i < printedData.length; i++) {
+        var newRow = document.createElement("tr");
+        var userName = printedData[i].userName;
+        var userScore = printedData[i].userScore;
+
+        var newCol01 = document.createElement("td");
+        var col01Content = document.createTextNode(userName);
+        newCol01.appendChild(col01Content)
+        newRow.appendChild(newCol01);
+
+        var newCol02 = document.createElement("td");
+        var col02Content = document.createTextNode(userScore);
+        newCol02.appendChild(col02Content)
+        newRow.appendChild(newCol02)
+
+        tbBody.appendChild(newRow);
+    }
+}
+
+/* <------ View High Score Page ------> */
+function viewScore() {
+    settleSectionEl.className = "hidden";
+    menuSectionEl.className = "hidden";
+    quizSectionEl.className = "hidden";
+    viewhighScoreSectionEl.className = "visible";
+}
+
 /* {============================= Add Event Listener  =============================} */
 startBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
@@ -114,6 +172,14 @@ quizSectionEl.addEventListener("click", function (evt) {
         checkAnswer(item);
         getQuestion();
     }
+})
+
+submitInitialBtnEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    setScore();
+    var data = getScore();
+    printScore(data);
+    viewScore();
 })
 
 /* {============================= Temp For Testing / Notes  =============================} */
