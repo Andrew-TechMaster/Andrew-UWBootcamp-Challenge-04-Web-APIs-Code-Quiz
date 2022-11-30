@@ -131,6 +131,8 @@ function printScore(printedData) {
     if (printedData !== null) {
         for (let i = 0; i < printedData.length; i++) {
             var newRow = document.createElement("tr");
+            newRow.setAttribute("data-index", i);
+
             var userName = printedData[i].userName;
             var userScore = printedData[i].userScore;
 
@@ -144,6 +146,11 @@ function printScore(printedData) {
             newCol02.appendChild(col02Content)
             newRow.appendChild(newCol02)
 
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete ❌";
+            deleteButton.className = "btn btn-danger btn-lg";
+
+            newRow.appendChild(deleteButton);
             tbBody.appendChild(newRow);
         }
     } else {
@@ -242,6 +249,22 @@ clearBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
     clearAll();
     printScore();
+})
+
+viewhighScoreSectionEl.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    var element = evt.target;
+    if (element.matches(".btn-danger")) {
+        var index = element.parentElement.getAttribute("data-index");
+        resultArray.splice(index, 1);
+
+        var userNameScore_Serialization = JSON.stringify(resultArray);
+        localStorage.setItem("userNameScore", userNameScore_Serialization);
+        var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
+        var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
+
+        printScore(savedUserNameScore_Deserialize)
+    }
 })
 
 init();

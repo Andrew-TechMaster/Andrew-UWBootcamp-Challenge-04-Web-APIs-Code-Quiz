@@ -38,6 +38,13 @@ form {
   margin-left: 2%;
 }
 
+/* tr button {
+  background-color: white;
+  color: red;
+  border: 5px black solid;
+  position: relative;
+  top: 8px
+} */
 /* {============================= Class Selectors =============================} */
 .card-body {
   margin: 5% 0;
