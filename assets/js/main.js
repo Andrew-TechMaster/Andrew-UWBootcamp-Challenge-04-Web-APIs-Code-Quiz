@@ -32,8 +32,9 @@ var resultArray = [];
 /* {============================= Functions (callback) =============================} */
 /* <------ Count Down / Timer ------> */
 function countDown() {
-    navBarDefaultTextEL.classList.add("hidden");
-    timerEl.className = "visible";
+    timerEl.textContent = "Time: "
+    navBarDefaultTextEL.className = "navbar-text text-light hidden";
+    timerEl.classList.replace("hidden", "visible");
 
     var timeInterval = setInterval(function () {
         timeLeft--;
@@ -108,21 +109,31 @@ function setScore() {
         userScore: totalScore,
     };
 
-    var userNameScore_Serialization = JSON.stringify(userNameScore);
+    resultArray.push(userNameScore);
+    var userNameScore_Serialization = JSON.stringify(resultArray);
     localStorage.setItem("userNameScore", userNameScore_Serialization);
+
+    // var userNameScore_Serialization = JSON.stringify(userNameScore);
+    // localStorage.setItem("userNameScore", userNameScore_Serialization);
 }
 
 /* <------ Get Score / Return Array Obj ------> */
 function getScore() {
+
     var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
     var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
 
-    if (savedUserNameScore_Deserialize != null) {
-        resultArray.push(savedUserNameScore_Deserialize);
-    }
+    return savedUserNameScore_Deserialize;
 
-    console.log(resultArray);
-    return resultArray;
+    // var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
+    // var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
+
+    // if (savedUserNameScore_Deserialize != null) {
+    //     resultArray.push(savedUserNameScore_Deserialize);
+    // }
+
+    // console.log(resultArray);
+    // return resultArray;
 }
 
 /* <------ Print Score ------> */
@@ -157,9 +168,40 @@ function viewScore() {
     viewhighScoreSectionEl.className = "visible";
 }
 
+/* <------ Back To Home Page ------> */
+function toHomepage() {
+    settleSectionEl.className = "hidden";
+    quizSectionEl.className = "hidden";
+    viewhighScoreSectionEl.className = "hidden";
+    menuSectionEl.className = "visible";
+
+    navBarDefaultTextEL.classList.replace("hidden", "visible");
+    timerEl.classList.replace("visible", "hidden");
+}
+
+/* <------ init  ------> */
+// prevent reolading then clear up all loacalstorage
+// since I initialize an empty resultArray at first 
+function init() {
+    var storedData = JSON.parse(localStorage.getItem("userNameScore"));
+    if (storedData !== null) {
+        resultArray = storedData;
+    }
+}
+
 /* {============================= Add Event Listener  =============================} */
+viewBtnEl.addEventListener("click", function () {
+    var data = getScore();
+    printScore(data);
+    viewScore();
+})
+
 startBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
+    totalScore = 0;
+    questionIndex = 0;
+    timeLeft = lengthOfQuestions * 10;
+
     countDown();
     getQuestion();
 });
@@ -182,6 +224,9 @@ submitInitialBtnEl.addEventListener("click", function (evt) {
     viewScore();
 })
 
+goBackBtnEl.addEventListener("click", toHomepage)
+
+init();
 /* {============================= Temp For Testing / Notes  =============================} */
 // startGame() => call countDown(), call getQuestion() 
 // countDown() => return void
