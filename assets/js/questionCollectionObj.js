@@ -25,7 +25,7 @@ const questionCollection = [
         answer: "Not A Number"
     },
     {
-        title: "What is the author name of this application",
+        title: "Who created this application?",
         choices: ["Andrew", "Andre", "Andreson", "Andy"],
         answer: "Andrew"
     }
