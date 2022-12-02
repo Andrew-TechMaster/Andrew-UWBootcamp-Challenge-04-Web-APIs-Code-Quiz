@@ -27,7 +27,7 @@ https://andrew-techmaster.github.io/Andrew-UWBootcamp-Challenge-04-Web-APIs-Code
 ## 🦊 How I Design 
 - Four sections in the main elements
     - Menu (visible)
-    - Quia (hidden -> visible)
+    - Quiz (hidden -> visible)
     - Settle (hidden -> visible)
     - Score (hidden -> visible)
 - Styles
@@ -36,7 +36,7 @@ https://andrew-techmaster.github.io/Andrew-UWBootcamp-Challenge-04-Web-APIs-Code
     - Own customization
 - Data Storage
     - JavaScript array in the local
-    - JSON array in remote the (local storage)
+    - JSON array in the remote (local storage)
     - addScore() function: add data in the local array
     - pushScore() function: push data to the remote (Serialize)
     - pullScore() function: get data from the remote (Deserialize)

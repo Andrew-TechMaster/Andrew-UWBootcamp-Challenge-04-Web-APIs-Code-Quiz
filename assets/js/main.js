@@ -205,8 +205,13 @@ function clearAll() {
 }
 
 /* <------ init  ------> */
-// prevent reolading then clear up all loacalstorage
-// since I initialize an empty resultArray at first 
+// prevent reloading then clear up all loacalstorage
+/* 
+TBMS, if reloading and then subimt the initial, then addScore() will push the data to an empty array.
+Since I initialized an empty resultArray at the beginning, so I need the init() to check if there is any data in the local storage first.
+If there is an exisiting JSON object: userNameScore in the local storage => Then push all the data in the local empty array first.
+So that the application will keep the record even after reloading and submit the new data.
+*/  
 function init() {
     var exisitingData = JSON.parse(localStorage.getItem("userNameScore"));
     if (exisitingData !== null) {
@@ -296,7 +301,7 @@ init();
 
 
 
-/* {============================= Temp For Testing / Notes  =============================} */
+/* {============================= Temp For Testing / Notes / Please Ignore =============================} */
 // startGame() => call countDown(), call getQuestion() 
 // countDown() => return void
 // getQuestion() => return void
