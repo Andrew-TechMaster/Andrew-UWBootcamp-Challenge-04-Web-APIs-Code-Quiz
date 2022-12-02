@@ -1,4 +1,4 @@
-# Andrew(Sheng-Chu), Chou's Portfolio
+# Andrew's Code Quiz Project
 
 ## 🐳 Overview:
 > * Code Quiz application using HTML, CSS(BootStrap), JavaScript
