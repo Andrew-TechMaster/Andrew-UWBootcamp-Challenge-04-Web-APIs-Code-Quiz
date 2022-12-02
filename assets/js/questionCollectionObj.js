@@ -12,7 +12,7 @@ const questionCollection = [
     {
         title: "Inside which HTML element do we put the JavaScript?",
         choices: ["<script>", "<scripting>", "<js>", "<javascript>"],
-        answer: "script"
+        answer: "<script>"
     },
     {
         title: "Where is the correct place to insert a JavaScript?",

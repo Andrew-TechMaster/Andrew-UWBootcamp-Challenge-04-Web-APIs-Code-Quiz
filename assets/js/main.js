@@ -24,12 +24,12 @@ var inputNameEl = document.querySelector("#inputName");
 /* <------ Variables ------> */
 var setOfQuestions = questionCollection;
 var lengthOfQuestions = setOfQuestions.length;
+let wrongPenalty = 2;
+let correctBonus = 10;
 var timeLeft = lengthOfQuestions * 10;
 var totalScore = 0;
 var questionIndex = 0;
 var resultArray = [];
-let wrongPenalty = 2;
-let correctBonus = 10;
 
 /* {============================= Functions (callback) =============================} */
 /* <------ Count Down / Timer ------> */
@@ -102,20 +102,25 @@ function endGame() {
 }
 
 
-/* <------ Set Score / Convert obj to JSON and then save it on local storage ------> */
-function setScore() {
+/* <------ Add Score / Commit Score / Set Score ------> */
+function addScore() {
     var userNameScore = {
         userName: inputNameEl.value,
         userScore: totalScore,
     };
 
     resultArray.push(userNameScore);
+}
+
+/* <------ Push Score / Convert obj to JSON and then save it on local storage ------> */
+function pushScore() {
+
     var userNameScore_Serialization = JSON.stringify(resultArray);
     localStorage.setItem("userNameScore", userNameScore_Serialization);
 }
 
-/* <------ Get Score / Return Array Obj ------> */
-function getScore() {
+/* <------ Pull Score / Get Score from remote and transfer it to JavaScript Obj ------> */
+function pullScore() {
     var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
     var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
 
@@ -180,8 +185,6 @@ function viewScore() {
 
     navBarDefaultTextEL.classList.replace("visible", "hidden");
     timerEl.classList.replace("visible", "hidden");
-
-    inputNameEl.value = "";
 }
 
 /* <------ Back To Home Page ------> */
@@ -205,9 +208,9 @@ function clearAll() {
 // prevent reolading then clear up all loacalstorage
 // since I initialize an empty resultArray at first 
 function init() {
-    var storedData = JSON.parse(localStorage.getItem("userNameScore"));
-    if (storedData !== null) {
-        resultArray = storedData;
+    var exisitingData = JSON.parse(localStorage.getItem("userNameScore"));
+    if (exisitingData !== null) {
+        resultArray = exisitingData;
     }
 }
 
@@ -215,7 +218,8 @@ function init() {
 /* <------ View High Score Button ------> */
 viewBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
-    var data = getScore();
+
+    var data = pullScore();
     printScore(data);
     viewScore();
 })
@@ -223,9 +227,11 @@ viewBtnEl.addEventListener("click", function (evt) {
 /* <------ Start Button ------> */
 startBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
+
     totalScore = 0;
     questionIndex = 0;
     timeLeft = lengthOfQuestions * 10;
+    inputNameEl.value = "";
 
     countDown();
     getQuestion();
@@ -234,6 +240,7 @@ startBtnEl.addEventListener("click", function (evt) {
 /* <------ Quiz Section: Options Button ------> */
 quizSectionEl.addEventListener("click", function (evt) {
     evt.preventDefault();
+
     var target = evt.target;
     if (target.matches(".btn")) {
         var item = target.textContent;
@@ -245,8 +252,10 @@ quizSectionEl.addEventListener("click", function (evt) {
 /* <------ Submit Initial Button ------> */
 submitInitialBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
-    setScore();
-    var data = getScore();
+
+    addScore();
+    pushScore();
+    var data = pullScore();
     printScore(data);
     viewScore();
 })
@@ -257,6 +266,7 @@ goBackBtnEl.addEventListener("click", toHomepage)
 /* <------ Clear Button ------> */
 clearBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
+
     clearAll();
     printScore();
 })
@@ -264,17 +274,16 @@ clearBtnEl.addEventListener("click", function (evt) {
 /* <------ Delete Button In View Score Table ------> */
 viewhighScoreSectionEl.addEventListener("click", function (evt) {
     evt.preventDefault();
+
     var element = evt.target;
     if (element.matches(".btn-danger")) {
         var index = element.parentElement.getAttribute("data-index");
         resultArray.splice(index, 1);
 
-        var userNameScore_Serialization = JSON.stringify(resultArray);
-        localStorage.setItem("userNameScore", userNameScore_Serialization);
-        var savedUserNameScore_JSON = localStorage.getItem("userNameScore");
-        var savedUserNameScore_Deserialize = JSON.parse(savedUserNameScore_JSON);
-
-        printScore(savedUserNameScore_Deserialize)
+        // don't call addScore() here, or we will have a record without name
+        pushScore();
+        var data = pullScore();
+        printScore(data);
     }
 })
 
