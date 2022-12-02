@@ -1,11 +1,11 @@
 const questionCollection = [
     {
         title: "Commonly used data types DO NOT include: ",
-        choices: ["strig", "booleans", "alert", "numbers"],
+        choices: ["string", "booleans", "alert", "numbers"],
         answer: "alert"
     },
     {
-        title: "What methods can be used on HTML elements returns and will return true if an element matches a specific CSS selector(s).",
+        title: "What methods can be used and will return true if an element matches a specific CSS selector(s).",
         choices: ["contains", "includes", "matches", "containsKey"],
         answer: "matches"
     },

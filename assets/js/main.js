@@ -252,12 +252,8 @@ quizSectionEl.addEventListener("click", function (evt) {
 /* <------ Submit Initial Button ------> */
 submitInitialBtnEl.addEventListener("click", function (evt) {
     evt.preventDefault();
-    // console.log("-----------");
-    // console.log("start submit");
-
 
     if (inputNameEl.value === "") {
-        // console.log("Empty");
         alert("Please Enter Your Initial");
     } else {
         addScore();
@@ -266,12 +262,7 @@ submitInitialBtnEl.addEventListener("click", function (evt) {
         printScore(data);
         viewScore();
     }
-
-    // console.log(inputNameEl.value);
-    // console.log(typeof(inputNameEl.value));
-    // console.log("end submit");
-}
-)
+})
 
 /* <------ Go Back Button ------> */
 goBackBtnEl.addEventListener("click", toHomepage)
