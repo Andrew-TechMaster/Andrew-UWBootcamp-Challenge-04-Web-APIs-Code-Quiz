@@ -45,6 +45,7 @@ https://andrew-techmaster.github.io/Andrew-UWBootcamp-Challenge-04-Web-APIs-Code
     - title: string
     - choice: string[ ]
     - answer: string (one of the item in the string[ ])
+    - For testing this app, answers of the default question set is: c, c, a, c, a, a
 - Event Listener
     - View Score Button
     - Start Button (menu section)
