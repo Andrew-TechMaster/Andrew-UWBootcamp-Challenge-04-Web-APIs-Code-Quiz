@@ -98,6 +98,17 @@ function endGame() {
     quizSectionEl.className = "hidden";
     settleSectionEl.className = "visible";
 
+    /*
+    Prevent from edge case: while playing the game but jump to the "view high score"...
+    After redirecting to the "view high score" and then back to the "home page"...
+    If fact the game is still going, so if the time is up => then settle section will appear...
+    The following is just one of the way we can prevent from this kind of error happen.
+    Another way to fix this: prevent from user clicking the "view high score" button during the quiz game... 
+     */
+    if (menuSectionEl.className === "visible") {
+        settleSectionEl.className = "hidden";
+    }
+
     displayScoreEl.textContent = `Your Final Score is ${totalScore}`
 }
 
@@ -211,7 +222,7 @@ TBMS, if reloading and then subimt the initial, then addScore() will push the da
 Since I initialized an empty resultArray at the beginning, so I need the init() to check if there is any data in the local storage first.
 If there is an exisiting JSON object: userNameScore in the local storage => Then push all the data in the local empty array first.
 So that the application will keep the record even after reloading and submit the new data.
-*/  
+*/
 function init() {
     var exisitingData = JSON.parse(localStorage.getItem("userNameScore"));
     if (exisitingData !== null) {
